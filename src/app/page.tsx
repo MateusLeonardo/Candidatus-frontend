@@ -1,11 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useLogout } from "@/hooks/queries/useAuth";
+import { useMutationLogout } from "@/hooks/queries/auth/useMutationLogout";
 import { useUserProfile } from "@/hooks/queries/useUser";
 import Link from "next/link";
 
 export default function Home() {
-  const useLogoutMutation = useLogout();
+  const useLogoutMutation = useMutationLogout();
   const { data: user } = useUserProfile();
 
   return (
