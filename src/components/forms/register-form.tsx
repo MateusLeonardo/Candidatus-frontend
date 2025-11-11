@@ -10,17 +10,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useRegisterUser } from "@/hooks/queries/useAuth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema, type RegisterFormData } from "@/lib/validations/auth";
 import Link from "next/link";
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { useMutationRegisterUser } from "@/hooks/queries/auth/useMutationRegisterUser";
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const registerMutation = useRegisterUser();
+  const registerMutation = useMutationRegisterUser();
   const {
     register,
     handleSubmit,
