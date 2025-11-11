@@ -10,14 +10,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useLogin } from "@/hooks/queries/useAuth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginFormData } from "@/lib/validations/auth";
 import Link from "next/link";
+import { useMutationLogin } from "@/hooks/queries/auth/useMutationLogin";
+import { Form } from "../ui/form";
 
 export function LoginForm() {
-  const loginMutation = useLogin();
+  const loginMutation = useMutationLogin();
   const {
     register,
     handleSubmit,
@@ -31,7 +32,7 @@ export function LoginForm() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-4">
+    <div className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
@@ -42,7 +43,7 @@ export function LoginForm() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mb-4">
+          <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mb-4">
             <div className="space-y-2">
               <Label htmlFor="email">E-mail</Label>
               <Input
@@ -80,7 +81,7 @@ export function LoginForm() {
             >
               {loginMutation.isPending ? "Entrando..." : "Entrar"}
             </Button>
-          </form>
+          </Form>
           <p className="text-sm text-center">
             Não tem uma conta? <Link href="/registrar">Registrar</Link>
           </p>
