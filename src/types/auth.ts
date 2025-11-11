@@ -1,4 +1,7 @@
-import { IUser } from "@/stores/user-store";
+export interface IUser {
+  id: string;
+  email: string;
+}
 
 export type IResponseError = {
   errors?: string[];
