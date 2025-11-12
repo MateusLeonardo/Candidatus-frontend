@@ -37,7 +37,7 @@ export function StateTable({ states }: StateTableProps) {
         <TableRow>
           <TableHead className="text-lg">Nome</TableHead>
           <TableHead className="text-lg">Sigla</TableHead>
-          <TableHead className="text-lg">Ações</TableHead>
+          <TableHead className="text-lg text-center">Ações</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -45,8 +45,8 @@ export function StateTable({ states }: StateTableProps) {
           <TableRow key={state.id}>
             <TableCell className="py-3 text-md">{state.name}</TableCell>
             <TableCell className="py-3 text-md">{state.uf}</TableCell>
-            <TableCell className="py-3 text-md">
-              <div className="flex gap-2">
+            <TableCell className="py-3 text-md text-center">
+              <div className="flex justify-center gap-2">
                 <StateDialog
                   state={state}
                   trigger={
