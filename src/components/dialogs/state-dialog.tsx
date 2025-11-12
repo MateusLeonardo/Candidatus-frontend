@@ -89,6 +89,7 @@ export function StateDialog({ state, trigger }: StateDialogProps) {
             <Input
               required
               id="name"
+              placeholder="Ex: São Paulo"
               {...register("name")}
               disabled={isLoading}
             />
@@ -98,7 +99,13 @@ export function StateDialog({ state, trigger }: StateDialogProps) {
           </div>
           <div className="grid gap-3">
             <Label htmlFor="uf">Sigla</Label>
-            <Input required id="uf" {...register("uf")} disabled={isLoading} />
+            <Input
+              required
+              id="uf"
+              placeholder="Ex: SP"
+              {...register("uf")}
+              disabled={isLoading}
+            />
             {errors.uf && <p className="text-red-500">{errors.uf.message}</p>}
           </div>
           <DialogFooter>
@@ -116,7 +123,11 @@ export function StateDialog({ state, trigger }: StateDialogProps) {
               className="cursor-pointer"
               disabled={isLoading}
             >
-              {isEditing ? "Salvar alterações" : "Adicionar"}
+              {isLoading
+                ? "Salvando..."
+                : isEditing
+                ? "Salvar alterações"
+                : "Adicionar"}
             </Button>
           </DialogFooter>
         </Form>
