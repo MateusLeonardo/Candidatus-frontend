@@ -1,14 +1,4 @@
 import {
-  AlertDialog,
-  AlertDialogTitle,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTrigger,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@/components/ui/alert-dialog";
-import {
   Table,
   TableBody,
   TableCell,
@@ -17,10 +7,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { IState } from "@/types/state";
 import { StateDialog } from "../dialogs/state-dialog";
 import { useMutationDeleteState } from "@/hooks/queries/state/useMutationDeleteState";
+import { ConfirmDialog } from "../dialogs/confirm-dialog";
 
 interface StateTableProps {
   states: IState[];
@@ -28,9 +19,6 @@ interface StateTableProps {
 export function StateTable({ states }: StateTableProps) {
   const deleteStateMutation = useMutationDeleteState();
 
-  const handleDeleteState = (state: IState) => {
-    deleteStateMutation.mutate(state.id);
-  };
   return (
     <Table>
       <TableHeader className="bg-accent">
@@ -59,35 +47,7 @@ export function StateTable({ states }: StateTableProps) {
                     </Button>
                   }
                 />
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="cursor-pointer"
-                    >
-                      <Trash className="w-4 h-4" />
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Deseja realmente remover o estado "{state.name}"?
-                      </AlertDialogTitle>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel className="cursor-pointer">
-                        Cancelar
-                      </AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={() => handleDeleteState(state)}
-                        className="cursor-pointer"
-                      >
-                        Remover
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
+               <ConfirmDialog deleteMutation={deleteStateMutation} id={state.id} title={state.name} />
               </div>
             </TableCell>
           </TableRow>

@@ -22,6 +22,7 @@ import { Button } from "../ui/button";
 import { Pencil, Trash } from "lucide-react";
 import { CityDialog } from "../dialogs/city-dialog";
 import { useMutationDeleteCity } from "@/hooks/queries/city/useMutationDeleteCity";
+import { ConfirmDialog } from "../dialogs/confirm-dialog";
 
 interface CityTableProps {
   cities: ICity[];
@@ -56,38 +57,7 @@ export function CityTable({ cities }: CityTableProps) {
                     </Button>
                   }
                 />
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="cursor-pointer"
-                    >
-                      <Trash className="w-4 h-4" />
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Deseja realmente remover a cidade "{city.name}"?
-                      </AlertDialogTitle>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel className="cursor-pointer">
-                        Cancelar
-                      </AlertDialogCancel>
-                      <AlertDialogAction
-                        className="cursor-pointer"
-                        onClick={() => deleteCityMutation.mutate(city.id)}
-                        disabled={deleteCityMutation.isPending}
-                      >
-                        {deleteCityMutation.isPending
-                          ? "Removendo..."
-                          : "Remover"}
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
+                <ConfirmDialog deleteMutation={deleteCityMutation} id={city.id} title={city.name} />
               </div>
             </TableCell>
           </TableRow>
