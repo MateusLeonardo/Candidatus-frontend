@@ -1,14 +1,14 @@
 "use client";
 
-import { CityDialog } from "@/components/dialogs/city-dialog";
-import { CityTableSkeleton } from "@/components/skeletons/city-table-skeleton";
+import { CityDialog } from "@/components/city/city-dialog";
+import { TableSkeleton } from "@/components/skeletons/table-skeleton";
 import { CityTable } from "@/components/tables/city-table";
 import { useGetAllCities } from "@/hooks/queries/city/useGetAllCities";
 
 export default function CidadesPage() {
   const { data: cities, isLoading: isLoadingCities } = useGetAllCities();
 
-  if (isLoadingCities) return <CityTableSkeleton />;
+  if (isLoadingCities) return <TableSkeleton />;
 
   return (
     <div className="my-8 px-8">

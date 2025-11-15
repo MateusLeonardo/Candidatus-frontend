@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { IState } from "@/types/state";
-import { StateDialog } from "../dialogs/state-dialog";
+import { StateDialog } from "../state/state-dialog";
 import { useMutationDeleteState } from "@/hooks/queries/state/useMutationDeleteState";
 import { ConfirmDialog } from "../dialogs/confirm-dialog";
 
@@ -47,7 +47,11 @@ export function StateTable({ states }: StateTableProps) {
                     </Button>
                   }
                 />
-               <ConfirmDialog deleteMutation={deleteStateMutation} id={state.id} title={state.name} />
+                <ConfirmDialog
+                  deleteMutation={deleteStateMutation}
+                  id={state.id}
+                  title={state.name}
+                />
               </div>
             </TableCell>
           </TableRow>

@@ -20,7 +20,7 @@ import {
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
 import { Pencil, Trash } from "lucide-react";
-import { CityDialog } from "../dialogs/city-dialog";
+import { CityDialog } from "../city/city-dialog";
 import { useMutationDeleteCity } from "@/hooks/queries/city/useMutationDeleteCity";
 import { ConfirmDialog } from "../dialogs/confirm-dialog";
 
@@ -57,7 +57,11 @@ export function CityTable({ cities }: CityTableProps) {
                     </Button>
                   }
                 />
-                <ConfirmDialog deleteMutation={deleteCityMutation} id={city.id} title={city.name} />
+                <ConfirmDialog
+                  deleteMutation={deleteCityMutation}
+                  id={city.id}
+                  title={city.name}
+                />
               </div>
             </TableCell>
           </TableRow>

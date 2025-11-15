@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 import { TableCell } from "@/components/ui/table";
 
-export function StateTableSkeleton() {
+export function TableSkeleton() {
   return (
     <div className="my-8 px-8">
       <div className="flex justify-between items-center mb-6">
@@ -23,7 +23,7 @@ export function StateTableSkeleton() {
                 <Skeleton className="h-6 w-28" />
               </TableHead>
               <TableHead className="text-lg">
-                <Skeleton className="h-6 w-20" />
+                <Skeleton className="h-6 w-28" />
               </TableHead>
               <TableHead className="text-lg">
                 <Skeleton className="h-6 w-20" />
