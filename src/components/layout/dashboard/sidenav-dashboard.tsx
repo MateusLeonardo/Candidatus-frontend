@@ -8,6 +8,7 @@ import {
   LogOut,
   Settings,
   MoreVerticalIcon,
+  Building,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -41,6 +42,11 @@ export default function SidenavDashboard() {
       href: "/dashboard/cidades",
       label: "Cidades",
       icon: MapPin,
+    },
+    {
+      href: "/dashboard/empresas",
+      label: "Empresas",
+      icon: Building,
     },
   ];
 
