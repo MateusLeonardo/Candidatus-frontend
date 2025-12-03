@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useMutationLogout } from "@/hooks/queries/auth/useMutationLogout";
-import { useUserProfile } from "@/hooks/queries/useUser";
+import { useMutationLogout } from "@/hooks/queries/auth/mutation-logout";
+import { useUserProfile } from "@/hooks/queries/use-user";
 import Link from "next/link";
 
 export default function Home() {

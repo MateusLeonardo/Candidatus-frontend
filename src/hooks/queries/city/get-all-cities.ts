@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import api from "@/lib/api";
 import { IResponseAllCities } from "@/types/city";
 
-export function useGetAllCities() {
+export function getAllCities() {
   return useQuery({
     queryKey: ["cities"],
     queryFn: async () => {

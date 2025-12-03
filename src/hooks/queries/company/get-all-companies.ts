@@ -4,7 +4,7 @@ import api from "@/lib/api";
 import { IResponseAllCompanies } from "@/types/company";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetAllCompanies() {
+export function getAllCompanies() {
   return useQuery({
     queryKey: ["companies"],
     queryFn: async () => {

@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
-export function useMutationLogout() {
+export function mutationLogout() {
   const router = useRouter();
   return useMutation({
     mutationFn: async () => {

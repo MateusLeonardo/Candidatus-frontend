@@ -22,7 +22,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { useGetAllStates } from "@/hooks/queries/state/useGetAllStates";
 import { IState } from "@/types/state";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
@@ -30,17 +29,15 @@ import {
   registerCitySchema,
 } from "@/lib/validations/city";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutationRegisterCity } from "@/hooks/queries/city/useMutationRegisterCity";
-import { useMutationUpdateCity } from "@/hooks/queries/city/useMutationUpdateCity";
 import { Skeleton } from "../ui/skeleton";
 import { ICompany } from "@/types/company";
-import { useGetAllCities } from "@/hooks/queries/city/useGetAllCities";
-import { useMutationRegisterCompany } from "@/hooks/queries/company/useMutationRegisterCompany";
 import {
   RegisterCompanyFormData,
   registerCompanySchema,
 } from "@/lib/validations/company";
-import { useMutationUpdateCompany } from "@/hooks/queries/company/useMutationUpdateCompany";
+import { getAllCities } from "@/hooks/queries/city/get-all-cities";
+import { mutationRegisterCompany } from "@/hooks/queries/company/mutation-register-company";
+import { mutationUpdateCompany } from "@/hooks/queries/company/mutation-update-company";
 
 interface ICompanyDialogProps {
   company?: ICompany;
@@ -48,9 +45,9 @@ interface ICompanyDialogProps {
 }
 export function CompanyDialog({ company, trigger }: ICompanyDialogProps) {
   const [open, setOpen] = useState(false);
-  const { data, isLoading: isLoadingCities } = useGetAllCities();
-  const registerCompanyMutation = useMutationRegisterCompany();
-  const updateCompanyMutation = useMutationUpdateCompany();
+  const { data, isLoading: isLoadingCities } = getAllCities();
+  const registerCompanyMutation = mutationRegisterCompany();
+  const updateCompanyMutation = mutationUpdateCompany();
   const isEditing = !!company;
   const isLoading =
     registerCompanyMutation.isPending || updateCompanyMutation.isPending;

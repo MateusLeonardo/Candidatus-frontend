@@ -13,8 +13,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Form } from "../ui/form";
-import { useMutationRegisterState } from "@/hooks/queries/state/useMutationRegisterState";
-import { useMutationUpdateState } from "@/hooks/queries/state/useMutationUpdateState";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
   RegisterStateFormData,
@@ -23,6 +21,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState, type ReactNode } from "react";
 import { IState } from "@/types/state";
+import { mutationRegisterState } from "@/hooks/queries/state/mutation-register-state";
+import { mutationUpdateState } from "@/hooks/queries/state/mutation-update-state";
 
 interface StateDialogProps {
   state?: IState;
@@ -35,8 +35,8 @@ const DEFAULT_VALUES: RegisterStateFormData = {
 };
 
 export function StateDialog({ state, trigger }: StateDialogProps) {
-  const registerStateMutation = useMutationRegisterState();
-  const updateStateMutation = useMutationUpdateState();
+  const registerStateMutation = mutationRegisterState();
+  const updateStateMutation = mutationUpdateState();
   const [open, setOpen] = useState(false);
   const isEditing = !!state;
 

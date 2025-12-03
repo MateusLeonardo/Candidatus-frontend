@@ -16,11 +16,11 @@ import { registerSchema, type RegisterFormData } from "@/lib/validations/auth";
 import Link from "next/link";
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { useMutationRegisterUser } from "@/hooks/queries/auth/useMutationRegisterUser";
+import { mutationRegisterUser } from "@/hooks/queries/auth/mutation-register-user";
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const registerMutation = useMutationRegisterUser();
+  const registerMutation = mutationRegisterUser();
   const {
     register,
     handleSubmit,

@@ -1,6 +1,6 @@
 "use client";
 import { ModeToggle } from "@/components/mode-toggle";
-import { useUserProfile } from "@/hooks/queries/useUser";
+import { useUserProfile } from "@/hooks/queries/use-user";
 import Link from "next/link";
 
 // export const metadata: Metadata = {

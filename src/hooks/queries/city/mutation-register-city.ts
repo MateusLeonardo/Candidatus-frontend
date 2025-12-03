@@ -1,23 +1,20 @@
-import { useToastError, useToastSuccess } from "@/hooks/useToast";
+import { useToastError, useToastSuccess } from "@/hooks/use-toast";
 import api from "@/lib/api";
 import { IResponseError } from "@/types/auth";
-import { IRequestUpdateCity } from "@/types/city";
+import { IRequestRegisterCity } from "@/types/city";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-interface UpdateCityPayload extends IRequestUpdateCity {
-  id: number;
-}
-
-export function useMutationUpdateCity() {
+export function mutationRegisterCity() {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: async ({ id, ...data }: UpdateCityPayload) => {
-      const response = await api.put(`/city/${id}`, data);
+    mutationFn: async (city: IRequestRegisterCity) => {
+      const response = await api.post("/city", city);
       return response.data;
     },
     onSuccess: () => {
-      useToastSuccess("Cidade atualizada com sucesso!");
+      useToastSuccess("Cidade registrada com sucesso!");
       queryClient.invalidateQueries({ queryKey: ["cities"] });
     },
     onError: (error: AxiosError<IResponseError>) => {

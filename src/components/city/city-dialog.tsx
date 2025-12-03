@@ -22,7 +22,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { useGetAllStates } from "@/hooks/queries/state/useGetAllStates";
 import { IState } from "@/types/state";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
@@ -30,9 +29,10 @@ import {
   registerCitySchema,
 } from "@/lib/validations/city";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutationRegisterCity } from "@/hooks/queries/city/useMutationRegisterCity";
-import { useMutationUpdateCity } from "@/hooks/queries/city/useMutationUpdateCity";
 import { Skeleton } from "../ui/skeleton";
+import { getAllStates } from "@/hooks/queries/state/get-all-states";
+import { mutationRegisterCity } from "@/hooks/queries/city/mutation-register-city";
+import { mutationUpdateCity } from "@/hooks/queries/city/mutation-update-city";
 
 interface CityDialogProps {
   city?: ICity;
@@ -40,9 +40,9 @@ interface CityDialogProps {
 }
 export function CityDialog({ city, trigger }: CityDialogProps) {
   const [open, setOpen] = useState(false);
-  const { data, isLoading: isLoadingStates } = useGetAllStates();
-  const registerCityMutation = useMutationRegisterCity();
-  const updateCityMutation = useMutationUpdateCity();
+  const { data, isLoading: isLoadingStates } = getAllStates();
+  const registerCityMutation = mutationRegisterCity();
+  const updateCityMutation = mutationUpdateCity();
   const isEditing = !!city;
   const isLoading =
     registerCityMutation.isPending || updateCityMutation.isPending;

@@ -1,6 +1,6 @@
 "use client";
 import { StateDialog } from "@/components/state/state-dialog";
-import { useGetAllStates } from "@/hooks/queries/state/useGetAllStates";
+import { useGetAllStates } from "@/hooks/queries/state/get-all-states";
 import { StateTable } from "@/components/tables/state-table";
 import { TableSkeleton } from "@/components/skeletons/table-skeleton";
 

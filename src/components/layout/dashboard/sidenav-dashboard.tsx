@@ -20,7 +20,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { useMutationLogout } from "@/hooks/queries/auth/useMutationLogout";
+import { useMutationLogout } from "@/hooks/queries/auth/mutation-logout";
 
 export default function SidenavDashboard() {
   const { mutate: logout } = useMutationLogout();

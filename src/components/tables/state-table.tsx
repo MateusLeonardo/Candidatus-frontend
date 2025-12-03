@@ -10,14 +10,14 @@ import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { IState } from "@/types/state";
 import { StateDialog } from "../state/state-dialog";
-import { useMutationDeleteState } from "@/hooks/queries/state/useMutationDeleteState";
+import { mutationDeleteState } from "@/hooks/queries/state/mutation-delete-state";
 import { ConfirmDialog } from "../dialogs/confirm-dialog";
 
 interface StateTableProps {
   states: IState[];
 }
 export function StateTable({ states }: StateTableProps) {
-  const deleteStateMutation = useMutationDeleteState();
+  const deleteStateMutation = mutationDeleteState();
 
   return (
     <Table>

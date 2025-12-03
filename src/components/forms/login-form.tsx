@@ -14,11 +14,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginFormData } from "@/lib/validations/auth";
 import Link from "next/link";
-import { useMutationLogin } from "@/hooks/queries/auth/useMutationLogin";
 import { Form } from "../ui/form";
+import { mutationLogin } from "@/hooks/queries/auth/mutation-login";
 
 export function LoginForm() {
-  const loginMutation = useMutationLogin();
+  const loginMutation = mutationLogin();
   const {
     register,
     handleSubmit,

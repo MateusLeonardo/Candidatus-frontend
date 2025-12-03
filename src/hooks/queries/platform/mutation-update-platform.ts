@@ -1,6 +1,6 @@
 "use client";
 
-import { useToastError, useToastSuccess } from "@/hooks/useToast";
+import { useToastError, useToastSuccess } from "@/hooks/use-toast";
 import api from "@/lib/api";
 import { RegisterPlatformFormData } from "@/lib/validations/platform";
 import { IResponseError } from "@/types/auth";
@@ -11,7 +11,7 @@ interface UpdatePlatformPayload extends RegisterPlatformFormData {
   id: number;
 }
 
-export function useMutationUpdatePlatform() {
+export function mutationUpdatePlatform() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ id, ...data }: UpdatePlatformPayload) =>

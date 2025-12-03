@@ -3,7 +3,7 @@ import api from "@/lib/api";
 import { IResponseAllStates } from "@/types/state";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetAllStates() {
+export function getAllStates() {
   return useQuery({
     queryKey: ["states"],
     queryFn: async () => {

@@ -4,7 +4,7 @@ import api from "@/lib/api";
 import { IResponseAllPlatforms } from "@/types/platform";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetAllPlatforms() {
+export function getAllPlatforms() {
   return useQuery({
     queryKey: ["platforms"],
     queryFn: async () => {

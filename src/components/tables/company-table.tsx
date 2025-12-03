@@ -10,14 +10,14 @@ import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { ConfirmDialog } from "../dialogs/confirm-dialog";
 import { ICompany } from "@/types/company";
-import { useMutationDeleteCompany } from "@/hooks/queries/company/useMutationDeleteCompany";
+import { mutationDeleteCompany } from "@/hooks/queries/company/mutation-delete-company";
 import { CompanyDialog } from "../company/company-dialog";
 
 interface CompanyTableProps {
   companies: ICompany[];
 }
 export function CompanyTable({ companies }: CompanyTableProps) {
-  const deleteCompanyMutation = useMutationDeleteCompany();
+  const deleteCompanyMutation = mutationDeleteCompany();
 
   return (
     <Table>

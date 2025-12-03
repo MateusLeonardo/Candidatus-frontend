@@ -8,27 +8,17 @@ import {
   TableRow,
 } from "../ui/table";
 import { Table } from "../ui/table";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../ui/alert-dialog";
 import { Button } from "../ui/button";
-import { Pencil, Trash } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { CityDialog } from "../city/city-dialog";
-import { useMutationDeleteCity } from "@/hooks/queries/city/useMutationDeleteCity";
+import { mutationDeleteCity } from "@/hooks/queries/city/mutation-delete-city";
 import { ConfirmDialog } from "../dialogs/confirm-dialog";
 
 interface CityTableProps {
   cities: ICity[];
 }
 export function CityTable({ cities }: CityTableProps) {
-  const deleteCityMutation = useMutationDeleteCity();
+  const deleteCityMutation = mutationDeleteCity();
   return (
     <Table>
       <TableHeader className="bg-accent">

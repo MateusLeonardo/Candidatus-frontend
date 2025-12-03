@@ -1,20 +1,15 @@
-import { useToastError, useToastSuccess } from "@/hooks/useToast";
+import { useToastError, useToastSuccess } from "@/hooks/use-toast";
 import api from "@/lib/api";
 import { IResponseError } from "@/types/auth";
-import { IRequestRegisterCity } from "@/types/city";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-export function useMutationRegisterCity() {
+export function mutationDeleteCity() {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: async (city: IRequestRegisterCity) => {
-      const response = await api.post("/city", city);
-      return response.data;
-    },
+    mutationFn: (id: number) => api.delete(`/city/${id}`),
     onSuccess: () => {
-      useToastSuccess("Cidade registrada com sucesso!");
+      useToastSuccess("Cidade removida com sucesso!");
       queryClient.invalidateQueries({ queryKey: ["cities"] });
     },
     onError: (error: AxiosError<IResponseError>) => {
