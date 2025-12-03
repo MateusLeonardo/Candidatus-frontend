@@ -1,4 +1,4 @@
-import { IResponseError } from "@/interfaces";
+import { IResponseError } from "@/types/auth";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 
