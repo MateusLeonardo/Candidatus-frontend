@@ -1,11 +1,11 @@
 "use client";
 import { StateDialog } from "@/components/state/state-dialog";
-import { useGetAllStates } from "@/hooks/queries/state/get-all-states";
 import { StateTable } from "@/components/tables/state-table";
 import { TableSkeleton } from "@/components/skeletons/table-skeleton";
+import { getAllStates } from "@/hooks/queries/state/get-all-states";
 
 export default function EstadosPage() {
-  const { data, isLoading } = useGetAllStates();
+  const { data, isLoading } = getAllStates();
 
   if (isLoading) return <TableSkeleton />;
 
