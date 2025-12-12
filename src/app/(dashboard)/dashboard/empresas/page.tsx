@@ -3,10 +3,10 @@
 import { CompanyDialog } from "@/components/company/company-dialog";
 import { TableSkeleton } from "@/components/skeletons/table-skeleton";
 import { CompanyTable } from "@/components/tables/company-table";
-import { useGetAllCompanies } from "@/hooks/queries/company/get-all-companies";
+import { getAllCompanies } from "@/hooks/queries/company/get-all-companies";
 
 export default function CompaniesPage() {
-  const { data: companies, isLoading } = useGetAllCompanies();
+  const { data: companies, isLoading } = getAllCompanies();
 
   if (isLoading) return <TableSkeleton />;
 
