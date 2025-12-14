@@ -9,6 +9,7 @@ import {
   Settings,
   MoreVerticalIcon,
   Building,
+  Briefcase,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -47,6 +48,11 @@ export default function SidenavDashboard() {
       href: "/dashboard/empresas",
       label: "Empresas",
       icon: Building,
+    },
+    {
+      href: "/dashboard/aplicacoes",
+      label: "Aplicações",
+      icon: Briefcase,
     },
   ];
 
