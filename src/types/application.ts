@@ -1,5 +1,6 @@
 import { ApplicationStatus } from "@/enums/application-status";
 import { WorkMode } from "@/enums/work-mode";
+import { ICompany } from "./company";
 
 export interface IApplication {
   id: number;
@@ -9,8 +10,28 @@ export interface IApplication {
   workMode: WorkMode;
   url: string;
   applicationDate: Date;
-  applicationStatus: ApplicationStatus;
+  status: ApplicationStatus;
   userId: number;
   platformId: number;
   companyId: number;
+  company: ICompany;
+}
+
+export interface IResponseAllApplications {
+  applications: IApplication[];
+}
+export interface IRequestRegisterApplication {
+  title: string;
+  description: string;
+  salary: number;
+  workMode: WorkMode;
+  url: string;
+  applicationDate: Date;
+  status: ApplicationStatus;
+  platformId: number;
+  companyId: number;
+}
+
+export interface IRequestUpdateApplication extends IRequestRegisterApplication {
+  id: number;
 }
