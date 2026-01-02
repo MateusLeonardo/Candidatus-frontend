@@ -5,3 +5,11 @@ export enum ApplicationStatus {
   Approved = 4,
   Rejected = 5,
 }
+
+export const ApplicationStatusLabel: Record<ApplicationStatus, string> = {
+  [ApplicationStatus.Pending]: "Pendente",
+  [ApplicationStatus.InReview]: "Em revisão",
+  [ApplicationStatus.Cancelled]: "Cancelada",
+  [ApplicationStatus.Approved]: "Aprovada",
+  [ApplicationStatus.Rejected]: "Rejeitada",
+};
