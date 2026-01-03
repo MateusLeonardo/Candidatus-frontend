@@ -25,7 +25,6 @@ export function DatePicker({ date, onChange }: DatePickerProps) {
 
   return (
     <div className="relative">
-      {/* INPUT VISUAL */}
       <Input
         readOnly
         value={date ? format(date, "dd/MM/yyyy", { locale: ptBR }) : ""}
@@ -55,10 +54,7 @@ export function DatePicker({ date, onChange }: DatePickerProps) {
               setOpen(false);
             }}
             captionLayout="dropdown"
-            fromYear={2000}
-            toYear={2035}
             locale={ptBR}
-            initialFocus
           />
         </PopoverContent>
       </Popover>
