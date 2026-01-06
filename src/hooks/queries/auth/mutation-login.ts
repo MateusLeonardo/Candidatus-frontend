@@ -7,10 +7,11 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import Cookies from "js-cookie";
+import { useUserContext } from "@/context/user-context";
 
 export function mutationLogin() {
   const router = useRouter();
-
+  const { setUserToLocalStorage } = useUserContext();
   return useMutation<
     IResponseUserLoggedIn,
     AxiosError<IResponseError>,
@@ -21,6 +22,7 @@ export function mutationLogin() {
       return response.data;
     },
     onSuccess: async (data: IResponseUserLoggedIn) => {
+      setUserToLocalStorage(data.user);
       Cookies.set("access_token", data.tokens.accessToken, {
         expires: 7,
         secure: process.env.NODE_ENV === "production",
