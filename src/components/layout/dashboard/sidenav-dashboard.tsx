@@ -23,11 +23,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { mutationLogout } from "@/hooks/queries/auth/mutation-logout";
+import { useUserContext } from "@/context/user-context";
 
 export default function SidenavDashboard() {
   const { mutate: logout } = mutationLogout();
   const pathname = usePathname();
   const isActive = (href: string) => pathname === href;
+  const { user } = useUserContext();
 
   const navItems = [
     {
@@ -129,12 +131,8 @@ export default function SidenavDashboard() {
                     <AvatarImage src="https://github.com/mateusleonardo.png" />
                   </Avatar>
                   <div className="flex-1 flex flex-col items-start text-left">
-                    <span className="text-sm font-semibold">
-                      Mateus Leonardo
-                    </span>
-                    <span className="text-xs">
-                      mateus_leonardo1997@hotmail.com
-                    </span>
+                    {/* <span className="text-sm font-semibold">{user?.}</span> */}
+                    <span className="text-xs">{user?.email}</span>
                   </div>
                   <MoreVerticalIcon className="size-5" />
                 </Button>
