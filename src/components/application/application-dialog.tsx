@@ -157,6 +157,7 @@ export function ApplicationDialog({
               required
               {...register("description")}
               placeholder="Ex: Desenvolvedor Junior com experiência em React e Node.js."
+              className="h-40"
             />
             {errors.description && (
               <p className="text-red-500">{errors.description.message}</p>
@@ -184,8 +185,8 @@ export function ApplicationDialog({
               <p className="text-red-500">{errors.salary.message}</p>
             )}
           </div>
-          <div className="flex gap-3 justify-start">
-            <div>
+          <div className="flex gap-3 justify-between">
+            <div className="grid gap-3">
               <Label htmlFor="platformId">Plataforma</Label>
               <Controller
                 control={control}
@@ -254,31 +255,7 @@ export function ApplicationDialog({
                 <p className="text-red-500">{errors.workMode.message}</p>
               )}
             </div>
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="url">URL</Label>
-            <Input
-              required
-              {...register("url")}
-              placeholder="Ex: https://gupy.com.br"
-            />
-            {errors.url && <p className="text-red-500">{errors.url.message}</p>}
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="applicationDate">Data de aplicação</Label>
-            <Controller
-              control={control}
-              name="applicationDate"
-              render={({ field }) => (
-                <DatePicker date={field.value} onChange={field.onChange} />
-              )}
-            />
-            {errors.applicationDate && (
-              <p className="text-red-500">{errors.applicationDate.message}</p>
-            )}
-          </div>
-          <div className="flex gap-3">
-            <div>
+            <div className="grid gap-3">
               <Label htmlFor="status">Status</Label>
               <Controller
                 control={control}
@@ -311,7 +288,7 @@ export function ApplicationDialog({
               )}
             </div>
 
-            <div>
+            <div className="grid gap-3">
               <Label htmlFor="companyId">Empresa</Label>
               <Controller
                 control={control}
@@ -344,6 +321,29 @@ export function ApplicationDialog({
               )}
             </div>
           </div>
+          <div className="grid gap-3">
+            <Label htmlFor="url">URL</Label>
+            <Input
+              required
+              {...register("url")}
+              placeholder="Ex: https://gupy.com.br"
+            />
+            {errors.url && <p className="text-red-500">{errors.url.message}</p>}
+          </div>
+          <div className="grid gap-3">
+            <Label htmlFor="applicationDate">Data de aplicação</Label>
+            <Controller
+              control={control}
+              name="applicationDate"
+              render={({ field }) => (
+                <DatePicker date={field.value} onChange={field.onChange} />
+              )}
+            />
+            {errors.applicationDate && (
+              <p className="text-red-500">{errors.applicationDate.message}</p>
+            )}
+          </div>
+          <div className="flex gap-3"></div>
           <DialogFooter>
             <DialogClose asChild>
               <Button
