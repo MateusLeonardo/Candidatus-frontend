@@ -10,6 +10,7 @@ import {
   MoreVerticalIcon,
   Building,
   Briefcase,
+  LaptopMinimal,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -48,6 +49,11 @@ export default function SidenavDashboard() {
       href: "/dashboard/empresas",
       label: "Empresas",
       icon: Building,
+    },
+    {
+      href: "/dashboard/plataformas",
+      label: "Plataformas",
+      icon: LaptopMinimal,
     },
     {
       href: "/dashboard/aplicacoes",
