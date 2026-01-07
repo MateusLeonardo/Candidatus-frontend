@@ -1,4 +1,4 @@
-import { IResponseError } from "@/types/auth";
+import { IResponseError } from "@/features/auth/types/auth";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 
