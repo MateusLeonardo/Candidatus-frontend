@@ -23,6 +23,7 @@ import {
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { FormField } from "@/components/shared/form-fields/form-field";
 
 interface IPlatformDialogProps {
   platform?: IPlatform;
@@ -87,24 +88,24 @@ export function PlatformDialog({ platform, trigger }: IPlatformDialogProps) {
         </DialogHeader>
         <Form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
           <div className="grid gap-3">
-            <Label htmlFor="name">Nome</Label>
-            <Input
-              required
-              {...register("name")}
+            <FormField
+              label="Nome"
+              name="name"
+              register={register}
+              errors={errors}
               placeholder="Ex: Candidatus"
+              required
             />
-            {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
-            )}
           </div>
           <div className="grid gap-3">
-            <Label htmlFor="url">URL</Label>
-            <Input
-              required
-              {...register("url")}
+            <FormField
+              label="URL"
+              name="url"
+              register={register}
+              errors={errors}
               placeholder="Ex: https://candidatus.com"
+              required
             />
-            {errors.url && <p className="text-red-500">{errors.url.message}</p>}
           </div>
           <DialogFooter>
             <DialogClose asChild>
