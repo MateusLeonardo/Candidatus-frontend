@@ -175,7 +175,6 @@ export function ApplicationDialog({
               errors={errors}
               placeholder="Ex: Desenvolvedor Junior com experiência em React e Node.js."
               required
-              className="h-40"
             />
             <FormCurrencyField
               label="Salário"
