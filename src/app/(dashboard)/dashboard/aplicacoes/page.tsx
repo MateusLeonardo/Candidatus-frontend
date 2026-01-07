@@ -1,8 +1,8 @@
 "use client";
-import { ApplicationDialog } from "@/components/application/application-dialog";
-import { TableSkeleton } from "@/components/skeletons/table-skeleton";
-import { ApplicationTable } from "@/components/tables/application-table";
-import { getAllApplications } from "@/hooks/queries/application/get-all-applications";
+import { ApplicationDialog } from "@/features/application/components/application-dialog";
+import { ApplicationTable } from "@/features/application/components/application-table";
+import { TableSkeleton } from "@/components/shared/table-skeleton";
+import { getAllApplications } from "@/features/application/hooks/get-all-applications";
 
 export default function AplicacoesPage() {
   const { data, isLoading } = getAllApplications();

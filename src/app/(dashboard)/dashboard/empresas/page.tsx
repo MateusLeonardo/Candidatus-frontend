@@ -1,9 +1,9 @@
 "use client";
 
-import { CompanyDialog } from "@/components/company/company-dialog";
-import { TableSkeleton } from "@/components/skeletons/table-skeleton";
-import { CompanyTable } from "@/components/tables/company-table";
-import { getAllCompanies } from "@/hooks/queries/company/get-all-companies";
+import { CompanyDialog } from "@/features/company/components/company-dialog";
+import { CompanyTable } from "@/features/company/components/company-table";
+import { TableSkeleton } from "@/components/shared/table-skeleton";
+import { getAllCompanies } from "@/features/company/hooks/get-all-companies";
 
 export default function CompaniesPage() {
   const { data: companies, isLoading } = getAllCompanies();

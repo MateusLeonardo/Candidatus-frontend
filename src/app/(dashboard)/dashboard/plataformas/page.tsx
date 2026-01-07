@@ -1,8 +1,8 @@
 "use client";
-import { PlatformDialog } from "@/components/platform/platform-dialog";
-import { TableSkeleton } from "@/components/skeletons/table-skeleton";
-import { PlatformTable } from "@/components/tables/platform-table";
-import { getAllPlatforms } from "@/hooks/queries/platform/get-all-platforms";
+import { PlatformDialog } from "@/features/platform/components/platform-dialog";
+import { PlatformTable } from "@/features/platform/components/platform-table";
+import { TableSkeleton } from "@/components/shared/table-skeleton";
+import { getAllPlatforms } from "@/features/platform/hooks/get-all-platforms";
 
 export default function PlataformasPage() {
   const { data, isLoading } = getAllPlatforms();

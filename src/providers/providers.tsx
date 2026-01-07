@@ -1,4 +1,4 @@
-import { UserContextProvider } from "@/context/user-context";
+import { UserContextProvider } from "./user-context";
 import { QueryProvider } from "./query-provider";
 import { ThemeProvider } from "./theme-provider";
 export function Providers({ children }: { children: React.ReactNode }) {

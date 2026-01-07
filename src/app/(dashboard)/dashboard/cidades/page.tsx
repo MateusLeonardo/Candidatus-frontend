@@ -1,9 +1,9 @@
 "use client";
 
-import { CityDialog } from "@/components/city/city-dialog";
-import { TableSkeleton } from "@/components/skeletons/table-skeleton";
-import { CityTable } from "@/components/tables/city-table";
-import { getAllCities } from "@/hooks/queries/city/get-all-cities";
+import { CityDialog } from "@/features/city/components/city-dialog";
+import { CityTable } from "@/features/city/components/city-table";
+import { TableSkeleton } from "@/components/shared/table-skeleton";
+import { getAllCities } from "@/features/city/hooks/get-all-cities";
 
 export default function CidadesPage() {
   const { data: cities, isLoading: isLoadingCities } = getAllCities();

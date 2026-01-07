@@ -1,8 +1,8 @@
 "use client";
-import { StateDialog } from "@/components/state/state-dialog";
-import { StateTable } from "@/components/tables/state-table";
-import { TableSkeleton } from "@/components/skeletons/table-skeleton";
-import { getAllStates } from "@/hooks/queries/state/get-all-states";
+import { StateDialog } from "@/features/state/components/state-dialog";
+import { StateTable } from "@/features/state/components/state-table";
+import { TableSkeleton } from "@/components/shared/table-skeleton";
+import { getAllStates } from "@/features/state/hooks/get-all-states";
 
 export default function EstadosPage() {
   const { data, isLoading } = getAllStates();
