@@ -1,17 +1,14 @@
-"use client";
 import { ModeToggle } from "@/components/mode-toggle";
-import { useUserProfile } from "@/features/auth/hooks/use-user-profile";
+import { useUserContext } from "@/providers/user-context";
+import { Metadata } from "next";
 import Link from "next/link";
 
-// export const metadata: Metadata = {
-//   title: "Dashboard",
-// };
+export const metadata: Metadata = {
+  title: "Dashboard",
+};
 
 export default function DashboardPage() {
-  const { data: user, isLoading } = useUserProfile();
-
-  if (isLoading) return <div>Loading...</div>;
-
+  const { user } = useUserContext();
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <ModeToggle />
