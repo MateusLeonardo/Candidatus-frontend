@@ -16,6 +16,7 @@ import { loginSchema, type LoginFormData } from "@/lib/validations/auth";
 import Link from "next/link";
 import { Form } from "@/components/ui/form";
 import { mutationLogin } from "../hooks/mutation-login";
+import { FormField } from "@/components/shared/form-fields/form-field";
 
 export function LoginForm() {
   const loginMutation = mutationLogin();
@@ -45,34 +46,26 @@ export function LoginForm() {
         <CardContent>
           <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mb-4">
             <div className="space-y-2">
-              <Label htmlFor="email">E-mail</Label>
-              <Input
-                id="email"
-                type="email"
+              <FormField
+                label="E-mail"
+                name="email"
+                register={register}
+                errors={errors}
                 placeholder="seu@email.com"
+                type="email"
                 required
-                disabled={loginMutation.isPending}
-                {...register("email")}
               />
-              {errors.email && (
-                <p className="text-sm text-red-500">{errors.email.message}</p>
-              )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Senha</Label>
-              <Input
-                id="password"
-                type="password"
+              <FormField
+                label="Senha"
+                name="password"
+                register={register}
+                errors={errors}
                 placeholder="••••••••"
+                type="password"
                 required
-                disabled={loginMutation.isPending}
-                {...register("password")}
               />
-              {errors.password && (
-                <p className="text-sm text-red-500">
-                  {errors.password.message}
-                </p>
-              )}
             </div>
             <Button
               type="submit"
