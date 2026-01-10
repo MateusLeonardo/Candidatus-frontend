@@ -1,11 +1,12 @@
+"use client";
 import { ModeToggle } from "@/components/mode-toggle";
 import { useUserContext } from "@/providers/user-context";
 import { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Dashboard",
-};
+// export const metadata: Metadata = {
+//   title: "Dashboard",
+// };
 
 export default function DashboardPage() {
   const { user } = useUserContext();
