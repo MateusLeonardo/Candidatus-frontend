@@ -10,8 +10,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Form } from "@/components/ui/form";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
@@ -23,6 +21,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { IState } from "../types/state";
 import { mutationRegisterState } from "../hooks/mutation-register-state";
 import { mutationUpdateState } from "../hooks/mutation-update-state";
+import { FormField } from "@/components/shared/form-fields/form-field";
 
 interface StateDialogProps {
   state?: IState;
@@ -84,30 +83,24 @@ export function StateDialog({ state, trigger }: StateDialogProps) {
           </DialogDescription>
         </DialogHeader>
         <Form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-          <div className="grid gap-3">
-            <Label htmlFor="name">Nome</Label>
-            <Input
-              required
-              id="name"
-              placeholder="Ex: São Paulo"
-              {...register("name")}
-              disabled={isLoading}
-            />
-            {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
-            )}
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="uf">Sigla</Label>
-            <Input
-              required
-              id="uf"
-              placeholder="Ex: SP"
-              {...register("uf")}
-              disabled={isLoading}
-            />
-            {errors.uf && <p className="text-red-500">{errors.uf.message}</p>}
-          </div>
+          <FormField
+            label="Nome"
+            name="name"
+            register={register}
+            errors={errors}
+            placeholder="Ex: São Paulo"
+            required
+            disabled={isLoading}
+          />
+          <FormField
+            label="Sigla"
+            name="uf"
+            register={register}
+            errors={errors}
+            placeholder="Ex: SP"
+            required
+            disabled={isLoading}
+          />
           <DialogFooter>
             <DialogClose asChild>
               <Button
@@ -135,4 +128,3 @@ export function StateDialog({ state, trigger }: StateDialogProps) {
     </Dialog>
   );
 }
-
