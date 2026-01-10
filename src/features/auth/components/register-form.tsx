@@ -1,8 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
@@ -17,6 +15,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { mutationRegisterUser } from "../hooks/mutation-register-user";
+import { FormField } from "@/components/shared/form-fields/form-field";
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -50,64 +49,49 @@ export function RegisterForm() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mb-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">E-mail</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="seu@email.com"
-                required
-                disabled={registerMutation.isPending}
-                {...register("email")}
-              />
-              {errors.email && (
-                <p className="text-sm text-red-500">{errors.email.message}</p>
+            <FormField
+              label="E-mail"
+              name="email"
+              register={register}
+              errors={errors}
+              placeholder="seu@email.com"
+              type="email"
+              required
+              disabled={registerMutation.isPending}
+            />
+            <FormField
+              label="Senha"
+              name="password"
+              register={register}
+              errors={errors}
+              placeholder="••••••••"
+              type={showPassword ? "text" : "password"}
+              required
+              disabled={registerMutation.isPending}
+            />
+            <FormField
+              label="Confirmar Senha"
+              name="confirmPassword"
+              register={register}
+              errors={errors}
+              placeholder="••••••••"
+              type={showPassword ? "text" : "password"}
+              required
+              disabled={registerMutation.isPending}
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <EyeOffIcon className="w-4 h-4" />
+              ) : (
+                <EyeIcon className="w-4 h-4" />
               )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Senha</Label>
-              <Input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
-                required
-                disabled={registerMutation.isPending}
-                {...register("password")}
-              />
-              {errors.password && (
-                <p className="text-sm text-red-500">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirmar Senha</Label>
-              <Input
-                id="confirmPassword"
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
-                required
-                disabled={registerMutation.isPending}
-                {...register("confirmPassword")}
-              />
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? (
-                  <EyeOffIcon className="w-4 h-4" />
-                ) : (
-                  <EyeIcon className="w-4 h-4" />
-                )}
-              </Button>
-              {errors.confirmPassword && (
-                <p className="text-sm text-red-500">
-                  {errors.confirmPassword.message}
-                </p>
-              )}
-            </div>
+            </Button>
+
             <Button
               type="submit"
               className="w-full cursor-pointer"
