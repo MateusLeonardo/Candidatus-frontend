@@ -45,28 +45,24 @@ export function LoginForm() {
         </CardHeader>
         <CardContent>
           <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mb-4">
-            <div className="space-y-2">
-              <FormField
-                label="E-mail"
-                name="email"
-                register={register}
-                errors={errors}
-                placeholder="seu@email.com"
-                type="email"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <FormField
-                label="Senha"
-                name="password"
-                register={register}
-                errors={errors}
-                placeholder="••••••••"
-                type="password"
-                required
-              />
-            </div>
+            <FormField
+              label="E-mail"
+              name="email"
+              register={register}
+              errors={errors}
+              placeholder="seu@email.com"
+              type="email"
+              required
+            />
+            <FormField
+              label="Senha"
+              name="password"
+              register={register}
+              errors={errors}
+              placeholder="••••••••"
+              type="password"
+              required
+            />
             <Button
               type="submit"
               className="w-full cursor-pointer"
