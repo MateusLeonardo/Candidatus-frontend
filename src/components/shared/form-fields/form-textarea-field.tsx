@@ -40,6 +40,7 @@ export function FormTextareaField<T extends FieldValues>({
         disabled={disabled}
         placeholder={placeholder}
         rows={rows}
+        className="h-32"
         {...register(name)}
       />
       {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
