@@ -25,9 +25,9 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = getUserFromLocalStorage();
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      setUser(storedUser);
     }
   }, []);
 
@@ -44,7 +44,7 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
   const getUserFromLocalStorage = () => {
     const user = localStorage.getItem("user");
     if (!user) return null;
-    return JSON.parse(user);
+    return JSON.parse(user) as IUser;
   };
   return (
     <UserContext.Provider
@@ -58,4 +58,3 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     </UserContext.Provider>
   );
 }
-
