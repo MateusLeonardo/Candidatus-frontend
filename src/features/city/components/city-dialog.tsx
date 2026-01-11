@@ -13,15 +13,6 @@ import {
 } from "@/components/ui/dialog";
 import { ICity } from "../types/city";
 import { Form } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { IState } from "@/features/state/types/state";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
@@ -29,10 +20,11 @@ import {
   registerCitySchema,
 } from "@/lib/validations/city";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Skeleton } from "@/components/ui/skeleton";
 import { getAllStates } from "@/features/state/hooks/get-all-states";
 import { mutationRegisterCity } from "../hooks/mutation-register-city";
 import { mutationUpdateCity } from "../hooks/mutation-update-city";
+import { FormField } from "@/components/shared/form-fields/form-field";
+import { FormSelectField } from "@/components/shared/form-fields/form-select-field";
 
 interface CityDialogProps {
   city?: ICity;
@@ -51,6 +43,7 @@ export function CityDialog({ city, trigger }: CityDialogProps) {
     handleSubmit,
     setValue,
     reset,
+    control,
     formState: { errors },
   } = useForm<RegisterCityFormData>({
     resolver: zodResolver(registerCitySchema),
@@ -74,6 +67,12 @@ export function CityDialog({ city, trigger }: CityDialogProps) {
     mutation.mutate(payload as any, { onSuccess: () => setOpen(false) });
   };
 
+  const stateOptions =
+    data?.states.map((state: IState) => ({
+      label: state.name,
+      value: state.id,
+    })) || [];
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -95,44 +94,23 @@ export function CityDialog({ city, trigger }: CityDialogProps) {
           </DialogDescription>
         </DialogHeader>
         <Form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-          <div className="grid gap-3">
-            <Label htmlFor="name">Nome</Label>
-            <Input
-              required
-              {...register("name")}
-              placeholder="Ex: São José do Rio Preto"
-            />
-            {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
-            )}
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="state">Estado</Label>
-            {isLoadingStates ? (
-              <Skeleton className="w-full h-9" />
-            ) : (
-              <Select
-                onValueChange={(value) => setValue("stateId", Number(value))}
-                defaultValue={city?.stateId?.toString() ?? undefined}
-                disabled={isLoadingStates}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Selecione o estado" />
-                </SelectTrigger>
-                <SelectContent>
-                  {data?.states.map((state: IState) => (
-                    <SelectItem key={state.id} value={state.id.toString()}>
-                      {state.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
-
-            {errors.stateId && (
-              <p className="text-red-500">{errors.stateId.message}</p>
-            )}
-          </div>
+          <FormField
+            label="Nome"
+            name="name"
+            register={register}
+            errors={errors}
+            placeholder="Ex: São José do Rio Preto"
+            required
+          />
+          <FormSelectField
+            label="Estado"
+            name="stateId"
+            control={control}
+            errors={errors}
+            options={stateOptions}
+            placeholder="Selecione um estado"
+            disabled={isLoadingStates}
+          />
           <DialogFooter>
             <DialogClose asChild>
               <Button
