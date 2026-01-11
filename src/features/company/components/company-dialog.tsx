@@ -11,25 +11,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ICity } from "@/features/city/types/city";
 import { Form } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { IState } from "@/features/state/types/state";
 import { SubmitHandler, useForm } from "react-hook-form";
-import {
-  RegisterCityFormData,
-  registerCitySchema,
-} from "@/lib/validations/city";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Skeleton } from "@/components/ui/skeleton";
 import { ICompany } from "../types/company";
 import {
   RegisterCompanyFormData,
@@ -38,6 +22,8 @@ import {
 import { getAllCities } from "@/features/city/hooks/get-all-cities";
 import { mutationRegisterCompany } from "../hooks/mutation-register-company";
 import { mutationUpdateCompany } from "../hooks/mutation-update-company";
+import { FormField } from "@/components/shared/form-fields/form-field";
+import { FormSelectField } from "@/components/shared/form-fields/form-select-field";
 
 interface ICompanyDialogProps {
   company?: ICompany;
@@ -56,6 +42,7 @@ export function CompanyDialog({ company, trigger }: ICompanyDialogProps) {
     handleSubmit,
     setValue,
     reset,
+    control,
     formState: { errors },
   } = useForm<RegisterCompanyFormData>({
     resolver: zodResolver(registerCompanySchema),
@@ -81,6 +68,12 @@ export function CompanyDialog({ company, trigger }: ICompanyDialogProps) {
     mutation.mutate(payload as any, { onSuccess: () => setOpen(false) });
   };
 
+  const cityOptions =
+    data?.cities.map((city) => ({
+      label: city.name,
+      value: city.id,
+    })) || [];
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -102,44 +95,23 @@ export function CompanyDialog({ company, trigger }: ICompanyDialogProps) {
           </DialogDescription>
         </DialogHeader>
         <Form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-          <div className="grid gap-3">
-            <Label htmlFor="name">Nome</Label>
-            <Input
-              required
-              {...register("name")}
-              placeholder="Ex: Candidatus"
-            />
-            {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
-            )}
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="cityId">Cidade</Label>
-            {isLoadingCities ? (
-              <Skeleton className="w-full h-9" />
-            ) : (
-              <Select
-                onValueChange={(value) => setValue("cityId", Number(value))}
-                defaultValue={company?.cityId?.toString() ?? undefined}
-                disabled={isLoadingCities}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Selecione a cidade" />
-                </SelectTrigger>
-                <SelectContent>
-                  {data?.cities.map((city: ICity) => (
-                    <SelectItem key={city.id} value={city.id.toString()}>
-                      {city.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
-
-            {errors.cityId && (
-              <p className="text-red-500">{errors.cityId.message}</p>
-            )}
-          </div>
+          <FormField
+            name="name"
+            label="Nome"
+            register={register}
+            errors={errors}
+            placeholder="Ex: Candidatus"
+            required
+          />
+          <FormSelectField
+            name="cityId"
+            label="Cidade"
+            options={cityOptions}
+            errors={errors}
+            control={control}
+            placeholder="Selecione uma cidade"
+            required
+          />
           <DialogFooter>
             <DialogClose asChild>
               <Button
