@@ -64,31 +64,12 @@ export default function SidenavDashboard() {
     },
   ];
 
-  const footerItems = [
-    {
-      href: "/perfil",
-      label: "Perfil",
-      icon: User,
-    },
-    {
-      href: "/configuracoes",
-      label: "Configurações",
-      icon: Settings,
-    },
-    {
-      href: "/logout",
-      label: "Sair",
-      icon: LogOut,
-    },
-  ];
-
   return (
     <aside className="w-72 h-full min-h-screen flex flex-col bg-background text-slate-700 dark:text-slate-200">
-      <div className="flex flex-col">
-        <h1 className="text-xl font-bold tracking-tight py-5 px-4">
+      <div className="flex flex-col border-b h-[65px]">
+        <h1 className="text-xl font-bold tracking-tight py-4 px-3 h-full flex items-center">
           Candidatus
         </h1>
-        <hr className="border-border" />
       </div>
 
       <nav className="flex-1 flex flex-col mt-4">
@@ -118,47 +99,6 @@ export default function SidenavDashboard() {
               </li>
             );
           })}
-        </ul>
-        <ul className="space-y-2">
-          <li>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="group flex w-full items-center gap-1 px-3 py-4 rounded-lg transition-colors cursor-pointer"
-                >
-                  <Avatar className="ring-2 ring-white dark:ring-slate-700">
-                    <AvatarImage src="https://github.com/mateusleonardo.png" />
-                  </Avatar>
-                  <div className="flex-1 flex flex-col items-start text-left">
-                    {/* <span className="text-sm font-semibold">{user?.}</span> */}
-                    <span className="text-xs">{user?.email}</span>
-                  </div>
-                  <MoreVerticalIcon className="size-5" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-56 text-slate-700  dark:text-slate-200 border shadow-lg"
-                align="end"
-              >
-                <DropdownMenuGroup>
-                  <DropdownMenuItem className="cursor-pointer focus:bg-accent hover:bg-accent hover:text-accent-foreground">
-                    <User className="size-4" />
-                    <span>Minha conta</span>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuGroup>
-                  <DropdownMenuItem
-                    onClick={() => logout()}
-                    className="cursor-pointer focus:bg-accent hover:bg-accent hover:text-accent-foreground"
-                  >
-                    <LogOut className="size-4" />
-                    <span>Sair</span>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </li>
         </ul>
       </nav>
     </aside>
