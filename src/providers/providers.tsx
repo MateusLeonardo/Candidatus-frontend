@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    // <UserContextProvider>
     <Provider store={store}>
       <UserLoader>
         <QueryProvider>
@@ -22,6 +21,5 @@ export function Providers({ children }: { children: React.ReactNode }) {
         </QueryProvider>
       </UserLoader>
       </Provider>
-    // </UserContextProvider>
   );
 }
