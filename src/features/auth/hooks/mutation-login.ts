@@ -8,10 +8,12 @@ import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import Cookies from "js-cookie";
 import { useUserContext } from "@/providers/user-context";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/slices/user-slice";
 
 export function mutationLogin() {
   const router = useRouter();
-  const { setUserToLocalStorage } = useUserContext();
+  const dispatch = useDispatch();
   return useMutation<
     IResponseUserLoggedIn,
     AxiosError<IResponseError>,
@@ -22,7 +24,7 @@ export function mutationLogin() {
       return response.data;
     },
     onSuccess: async (data: IResponseUserLoggedIn) => {
-      setUserToLocalStorage(data.user);
+      dispatch(setUser(data.user));
       Cookies.set("access_token", data.tokens.accessToken, {
         expires: 7,
         secure: process.env.NODE_ENV === "production",
