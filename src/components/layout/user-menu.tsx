@@ -11,9 +11,7 @@ import { mutationLogout } from "@/features/auth/hooks/mutation-logout";
 export function UserMenu() {
   const { email } = useSelector((state: RootState) => state.user);
   const { mutate: logout } = mutationLogout();
-  
-  if (!email) return null;
-  
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,7 +23,7 @@ export function UserMenu() {
             <AvatarImage src="https://github.com/mateusleonardo.png" />
           </Avatar>
           <span className="hidden sm:inline-block text-sm font-medium">
-            {email}
+            {email && email}
           </span>
           <MoreVertical className="h-4 w-4" />
         </Button>
