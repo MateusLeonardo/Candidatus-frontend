@@ -1,19 +1,17 @@
 "use client";
 import { ModeToggle } from "@/components/mode-toggle";
-import { useUserContext } from "@/providers/user-context";
+import { RootState } from "@/store/configure-store";
 import { Metadata } from "next";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
-// export const metadata: Metadata = {
-//   title: "Dashboard",
-// };
 
 export default function DashboardPage() {
-  const { user } = useUserContext();
+  const {email} = useSelector((state: RootState) => state.user);
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <ModeToggle />
-      <h1 className="text-2xl font-bold">Dashboard {user?.email}</h1>
+      <h1 className="text-2xl font-bold">Dashboard {email}</h1>
       <Link href="/">Home</Link>
     </div>
   );
