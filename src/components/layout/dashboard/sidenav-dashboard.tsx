@@ -3,33 +3,16 @@ import Link from "next/link";
 import {
   Clipboard,
   Map,
-  MapPin,
-  User,
-  LogOut,
-  Settings,
-  MoreVerticalIcon,
-  Building,
+  MapPin, Building,
   Briefcase,
-  LaptopMinimal,
+  LaptopMinimal
 } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { mutationLogout } from "@/features/auth/hooks/mutation-logout";
-import { useUserContext } from "@/providers/user-context";
 
 export default function SidenavDashboard() {
-  const { mutate: logout } = mutationLogout();
   const pathname = usePathname();
   const isActive = (href: string) => pathname === href;
-  const { user } = useUserContext();
+
 
   const navItems = [
     {
@@ -76,7 +59,6 @@ export default function SidenavDashboard() {
         <ul className="space-y-2 flex-1 px-3">
           {navItems.map((item) => {
             const active = isActive(item.href);
-
             return (
               <li key={item.href}>
                 <Link
