@@ -51,7 +51,7 @@ export function LoginForm() {
               register={register}
               errors={errors}
               placeholder="seu@email.com"
-              type="email"
+              type="text"
               required
             />
             <FormField

@@ -77,8 +77,6 @@ describe('LoginForm', () => {
     const submitButton = screen.getByRole('button', { name: /entrar/i })
     await user.click(submitButton)
 
-    // O formulário deve impedir o submit se os campos estiverem vazios
-    // A validação do Zod deve funcionar
     await waitFor(() => {
       expect(mockMutate).not.toHaveBeenCalled()
     })
@@ -98,6 +96,7 @@ describe('LoginForm', () => {
 
     await waitFor(() => {
       expect(mockMutate).not.toHaveBeenCalled()
+      expect(screen.getByText('Digite um e-mail válido')).toBeInTheDocument()
     })
   })
 
