@@ -58,6 +58,30 @@ describe('RegisterForm', () => {
         expect(buttonSubmit).toBeInTheDocument()
     })
 
+    it('deve chamar a mutation ao submeter formulário válido', async () => {
+        const user = userEvent.setup()
+
+        render(<RegisterForm />)
+
+        const inputEmail = screen.getByLabelText(/e-mail/i)
+        const inputPassword = screen.getByLabelText(/^Senha$/i)
+        const inputConfirmPassword = screen.getByLabelText(/^Confirmar Senha$/i)
+        const buttonSubmit = screen.getByRole('button', { name: /registrar/i })
+
+        await user.type(inputEmail, 'teste@example.com')
+        await user.type(inputPassword, '123456')
+        await user.type(inputConfirmPassword, '123456')
+
+        await user.click(buttonSubmit)
+
+        await waitFor(() => {
+            expect(mockMutate).toHaveBeenCalledWith({
+                email: 'teste@example.com',
+                password: '123456',
+            })
+        })
+    })
+
     it('deve mostrar link para login', () => {
         render(<RegisterForm />)
 
