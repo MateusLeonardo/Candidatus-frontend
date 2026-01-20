@@ -55,7 +55,7 @@ export function RegisterForm() {
               register={register}
               errors={errors}
               placeholder="seu@email.com"
-              type="email"
+              type="text"
               required
               disabled={registerMutation.isPending}
             />
