@@ -98,7 +98,7 @@ export function ApplicationDialog({
             status: ApplicationStatus.Pending,
             platformId: 0,
             companyId: 0,
-          }
+          },
     );
   }, [open, reset, application]);
 
@@ -252,8 +252,8 @@ export function ApplicationDialog({
               {isLoading
                 ? "Salvando..."
                 : isEditing
-                ? "Salvar alterações"
-                : "Adicionar"}
+                  ? "Salvar alterações"
+                  : "Adicionar"}
             </Button>
           </DialogFooter>
         </Form>

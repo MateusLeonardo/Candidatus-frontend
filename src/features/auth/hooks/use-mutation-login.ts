@@ -1,5 +1,4 @@
 "use client";
-import { useToastError, useToastSuccess } from "@/hooks/use-toast";
 import { IRequestUserLogin, IResponseError } from "../types/auth";
 import { IResponseUserLoggedIn } from "../types/auth";
 import { AxiosError } from "axios";
@@ -7,11 +6,11 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import Cookies from "js-cookie";
-import { useUserContext } from "@/providers/user-context";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/slices/user-slice";
+import { showToastError, showToastSuccess } from "@/lib/utils/toast";
 
-export function mutationLogin() {
+export function useMutationLogin() {
   const router = useRouter();
   const dispatch = useDispatch();
   return useMutation<
@@ -30,12 +29,11 @@ export function mutationLogin() {
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
       });
-      useToastSuccess("Login realizado com sucesso!");
+      showToastSuccess("Login realizado com sucesso!");
       router.push("/dashboard");
     },
     onError: (error: AxiosError<IResponseError>) => {
-      useToastError(error);
+      showToastError(error);
     },
   });
 }
-

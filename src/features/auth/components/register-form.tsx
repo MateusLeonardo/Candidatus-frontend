@@ -14,12 +14,12 @@ import { registerSchema, type RegisterFormData } from "@/lib/validations/auth";
 import Link from "next/link";
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { mutationRegisterUser } from "../hooks/mutation-register-user";
 import { FormField } from "@/components/shared/form-fields/form-field";
+import { useMutationRegisterUser } from "../hooks/use-mutation-register-user";
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const registerMutation = mutationRegisterUser();
+  const registerMutation = useMutationRegisterUser();
   const {
     register,
     handleSubmit,
