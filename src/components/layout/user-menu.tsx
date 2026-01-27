@@ -1,16 +1,22 @@
-"use client"
+"use client";
 
-import { useSelector } from "react-redux"
-import { RootState } from "@/store/configure-store"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/configure-store";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { LogOut, MoreVertical, User } from "lucide-react";
-import { mutationLogout } from "@/features/auth/hooks/mutation-logout";
+import { useMutationLogout } from "@/features/auth/hooks/use-mutation-logout";
 
 export function UserMenu() {
   const { email } = useSelector((state: RootState) => state.user);
-  const { mutate: logout } = mutationLogout();
+  const { mutate: logout } = useMutationLogout();
 
   return (
     <DropdownMenu>

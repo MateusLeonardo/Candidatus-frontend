@@ -2,7 +2,7 @@ import { IResponseError } from "@/features/auth/types/auth";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 
-export function useToastError(error: AxiosError<IResponseError>) {
+export function showToastError(error: AxiosError<IResponseError>) {
   switch (error.response?.status) {
     case 400:
       error.response?.data.errors?.forEach((error: string) => {
@@ -24,6 +24,6 @@ export function useToastError(error: AxiosError<IResponseError>) {
   }
 }
 
-export function useToastSuccess(message: string) {
-  return toast.success(message);
+export function showToastSuccess(message: string) {
+  toast.success(message);
 }

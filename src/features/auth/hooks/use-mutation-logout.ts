@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { resetUser } from "@/slices/user-slice";
 
-export function mutationLogout() {
+export function useMutationLogout() {
   const router = useRouter();
   const dispatch = useDispatch();
   return useMutation({
@@ -17,4 +17,3 @@ export function mutationLogout() {
     },
   });
 }
-

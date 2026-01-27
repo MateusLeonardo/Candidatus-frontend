@@ -3,16 +3,16 @@ import Link from "next/link";
 import {
   Clipboard,
   Map,
-  MapPin, Building,
+  MapPin,
+  Building,
   Briefcase,
-  LaptopMinimal
+  LaptopMinimal,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 export default function SidenavDashboard() {
   const pathname = usePathname();
   const isActive = (href: string) => pathname === href;
-
 
   const navItems = [
     {
