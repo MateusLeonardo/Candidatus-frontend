@@ -14,16 +14,16 @@ import {
 import { Form } from "@/components/ui/form";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ICompany } from "../types/company";
+import { ICompany, UpdateCompanyPayload } from "../types/company";
 import {
   RegisterCompanyFormData,
   registerCompanySchema,
 } from "@/lib/validations/company";
-import { getAllCities } from "@/features/city/hooks/get-all-cities";
-import { mutationRegisterCompany } from "../hooks/mutation-register-company";
-import { mutationUpdateCompany } from "../hooks/mutation-update-company";
+import { useGetAllCities } from "@/features/city/hooks/use-get-all-cities";
+import { useMutationUpdateCompany } from "../hooks/use-mutation-update-company";
 import { FormField } from "@/components/shared/form-fields/form-field";
 import { FormSelectField } from "@/components/shared/form-fields/form-select-field";
+import { useMutationRegisterCompany } from "../hooks/use-mutation-register-company";
 
 interface ICompanyDialogProps {
   company?: ICompany;
@@ -31,16 +31,15 @@ interface ICompanyDialogProps {
 }
 export function CompanyDialog({ company, trigger }: ICompanyDialogProps) {
   const [open, setOpen] = useState(false);
-  const { data, isLoading: isLoadingCities } = getAllCities();
-  const registerCompanyMutation = mutationRegisterCompany();
-  const updateCompanyMutation = mutationUpdateCompany();
+  const { data } = useGetAllCities();
+  const registerCompanyMutation = useMutationRegisterCompany();
+  const updateCompanyMutation = useMutationUpdateCompany();
   const isEditing = !!company;
   const isLoading =
     registerCompanyMutation.isPending || updateCompanyMutation.isPending;
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     control,
     formState: { errors },
@@ -56,7 +55,7 @@ export function CompanyDialog({ company, trigger }: ICompanyDialogProps) {
     reset(
       open && company
         ? { name: company.name, cityId: company.cityId }
-        : { name: "", cityId: 0 }
+        : { name: "", cityId: 0 },
     );
   }, [open, reset, company]);
 
@@ -65,7 +64,9 @@ export function CompanyDialog({ company, trigger }: ICompanyDialogProps) {
       ? updateCompanyMutation
       : registerCompanyMutation;
     const payload = isEditing && company ? { id: company.id, ...data } : data;
-    mutation.mutate(payload as any, { onSuccess: () => setOpen(false) });
+    mutation.mutate(payload as UpdateCompanyPayload, {
+      onSuccess: () => setOpen(false),
+    });
   };
 
   const cityOptions =
@@ -130,8 +131,8 @@ export function CompanyDialog({ company, trigger }: ICompanyDialogProps) {
               {isLoading
                 ? "Salvando..."
                 : isEditing
-                ? "Salvar alterações"
-                : "Adicionar"}
+                  ? "Salvar alterações"
+                  : "Adicionar"}
             </Button>
           </DialogFooter>
         </Form>

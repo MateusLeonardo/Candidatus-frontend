@@ -1,4 +1,5 @@
 import { ICity } from "@/features/city/types/city";
+import { RegisterCompanyFormData } from "@/lib/validations/company";
 
 export interface ICompany {
   id: number;
@@ -8,4 +9,7 @@ export interface ICompany {
 }
 export interface IResponseAllCompanies {
   companies: ICompany[];
+}
+export interface UpdateCompanyPayload extends RegisterCompanyFormData {
+  id: number;
 }

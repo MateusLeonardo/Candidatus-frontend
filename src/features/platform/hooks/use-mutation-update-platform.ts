@@ -1,28 +1,23 @@
 "use client";
 
-import { useToastError, useToastSuccess } from "@/hooks/use-toast";
 import api from "@/lib/api";
-import { RegisterPlatformFormData } from "@/lib/validations/platform";
 import { IResponseError } from "@/features/auth/types/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { showToastError, showToastSuccess } from "@/lib/utils/toast";
+import { UpdatePlatformPayload } from "../types/platform";
 
-interface UpdatePlatformPayload extends RegisterPlatformFormData {
-  id: number;
-}
-
-export function mutationUpdatePlatform() {
+export function useMutationUpdatePlatform() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ id, ...data }: UpdatePlatformPayload) =>
       api.put(`/platform/${id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["platforms"] });
-      useToastSuccess("Plataforma atualizada com sucesso");
+      showToastSuccess("Plataforma atualizada com sucesso");
     },
     onError: (error: AxiosError<IResponseError>) => {
-      useToastError(error);
+      showToastError(error);
     },
   });
 }
-

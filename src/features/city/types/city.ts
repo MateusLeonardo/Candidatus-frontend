@@ -21,3 +21,6 @@ export interface IRequestUpdateCity {
   stateId: number;
 }
 
+export interface UpdateCityPayload extends IRequestUpdateCity {
+  id: number;
+}

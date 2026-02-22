@@ -3,10 +3,10 @@
 import { CityDialog } from "@/features/city/components/city-dialog";
 import { CityTable } from "@/features/city/components/city-table";
 import { TableSkeleton } from "@/components/shared/table-skeleton";
-import { getAllCities } from "@/features/city/hooks/get-all-cities";
+import { useGetAllCities } from "@/features/city/hooks/use-get-all-cities";
 
 export default function CidadesPage() {
-  const { data: cities, isLoading: isLoadingCities } = getAllCities();
+  const { data: cities, isLoading: isLoadingCities } = useGetAllCities();
 
   if (isLoadingCities) return <TableSkeleton />;
 

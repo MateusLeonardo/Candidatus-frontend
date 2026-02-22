@@ -1,24 +1,22 @@
 "use client";
+
 import api from "@/lib/api";
 import { IResponseError } from "@/features/auth/types/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useToastSuccess } from "@/hooks/use-toast";
-import { useToastError } from "@/hooks/use-toast";
-import { RegisterCompanyFormData } from "@/lib/validations/company";
+import { showToastError, showToastSuccess } from "@/lib/utils/toast";
 
-export function mutationRegisterCompany() {
+export function useMutationDeleteCompany() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: RegisterCompanyFormData) =>
-      api.post("/company", data),
+    mutationFn: (id: number) => api.delete(`/company/${id}`),
     onSuccess: () => {
-      useToastSuccess("Empresa registrada com sucesso!");
+      showToastSuccess("Empresa removida com sucesso!");
       queryClient.invalidateQueries({ queryKey: ["companies"] });
     },
     onError: (error: AxiosError<IResponseError>) => {
-      useToastError(error);
+      showToastError(error);
     },
   });
 }

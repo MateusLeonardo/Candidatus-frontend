@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ICity } from "../types/city";
+import { ICity, UpdateCityPayload } from "../types/city";
 import { Form } from "@/components/ui/form";
 import { IState } from "@/features/state/types/state";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -20,9 +20,9 @@ import {
   registerCitySchema,
 } from "@/lib/validations/city";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { getAllStates } from "@/features/state/hooks/get-all-states";
-import { mutationRegisterCity } from "../hooks/mutation-register-city";
-import { mutationUpdateCity } from "../hooks/mutation-update-city";
+import { useGetAllStates } from "@/features/state/hooks/use-get-all-states";
+import { useMutationRegisterCity } from "../hooks/use-mutation-register-city";
+import { useMutationUpdateCity } from "../hooks/use-mutation-update-city";
 import { FormField } from "@/components/shared/form-fields/form-field";
 import { FormSelectField } from "@/components/shared/form-fields/form-select-field";
 
@@ -32,16 +32,15 @@ interface CityDialogProps {
 }
 export function CityDialog({ city, trigger }: CityDialogProps) {
   const [open, setOpen] = useState(false);
-  const { data, isLoading: isLoadingStates } = getAllStates();
-  const registerCityMutation = mutationRegisterCity();
-  const updateCityMutation = mutationUpdateCity();
+  const { data, isLoading: isLoadingStates } = useGetAllStates();
+  const registerCityMutation = useMutationRegisterCity();
+  const updateCityMutation = useMutationUpdateCity();
   const isEditing = !!city;
   const isLoading =
     registerCityMutation.isPending || updateCityMutation.isPending;
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     control,
     formState: { errors },
@@ -57,14 +56,16 @@ export function CityDialog({ city, trigger }: CityDialogProps) {
     reset(
       open && city
         ? { name: city.name, stateId: city.stateId }
-        : { name: "", stateId: 0 }
+        : { name: "", stateId: 0 },
     );
   }, [open, reset, city]);
 
   const onSubmit: SubmitHandler<RegisterCityFormData> = (data) => {
     const mutation = isEditing ? updateCityMutation : registerCityMutation;
     const payload = isEditing && city ? { id: city.id, ...data } : data;
-    mutation.mutate(payload as any, { onSuccess: () => setOpen(false) });
+    mutation.mutate(payload as UpdateCityPayload, {
+      onSuccess: () => setOpen(false),
+    });
   };
 
   const stateOptions =
@@ -129,8 +130,8 @@ export function CityDialog({ city, trigger }: CityDialogProps) {
               {isLoading
                 ? "Salvando..."
                 : isEditing
-                ? "Salvar alterações"
-                : "Adicionar"}
+                  ? "Salvar alterações"
+                  : "Adicionar"}
             </Button>
           </DialogFooter>
         </Form>

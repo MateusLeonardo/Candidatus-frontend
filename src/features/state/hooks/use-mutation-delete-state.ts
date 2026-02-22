@@ -1,23 +1,22 @@
 "use client";
 
 import api from "@/lib/api";
-import { useToastError, useToastSuccess } from "@/hooks/use-toast";
 import { IResponseError } from "@/features/auth/types/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { showToastError, showToastSuccess } from "@/lib/utils/toast";
 
-export function mutationDeletePlatform() {
+export function useMutationDeleteState() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id: number) => api.delete(`/platform/${id}`),
+    mutationFn: async (id: number) => api.delete(`/state/${id}`),
     onSuccess: () => {
-      useToastSuccess("Plataforma removida com sucesso!");
-      queryClient.invalidateQueries({ queryKey: ["platforms"] });
+      showToastSuccess("Estado removido com sucesso!");
+      queryClient.invalidateQueries({ queryKey: ["states"] });
     },
     onError: (error: AxiosError<IResponseError>) => {
-      useToastError(error);
+      showToastError(error);
     },
   });
 }
-

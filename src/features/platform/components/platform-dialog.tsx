@@ -1,11 +1,10 @@
 "use client";
-import { mutationRegisterPlatform } from "../hooks/mutation-register-platform";
-import { mutationUpdatePlatform } from "../hooks/mutation-update-platform";
+import { useMutationRegisterPlatform } from "../hooks/use-mutation-register-platform";
 import {
   RegisterPlatformFormData,
   registerPlatformSchema,
 } from "@/lib/validations/platform";
-import { IPlatform } from "../types/platform";
+import { IPlatform, UpdatePlatformPayload } from "../types/platform";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReactNode, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -22,6 +21,7 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { FormField } from "@/components/shared/form-fields/form-field";
+import { useMutationUpdatePlatform } from "../hooks/use-mutation-update-platform";
 
 interface IPlatformDialogProps {
   platform?: IPlatform;
@@ -29,15 +29,14 @@ interface IPlatformDialogProps {
 }
 export function PlatformDialog({ platform, trigger }: IPlatformDialogProps) {
   const [open, setOpen] = useState(false);
-  const registerPlatformMutation = mutationRegisterPlatform();
-  const updatePlatformMutation = mutationUpdatePlatform();
+  const registerPlatformMutation = useMutationRegisterPlatform();
+  const updatePlatformMutation = useMutationUpdatePlatform();
   const isEditing = !!platform;
   const isLoading =
     registerPlatformMutation.isPending || updatePlatformMutation.isPending;
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors },
   } = useForm<RegisterPlatformFormData>({
@@ -52,7 +51,7 @@ export function PlatformDialog({ platform, trigger }: IPlatformDialogProps) {
     reset(
       open && platform
         ? { name: platform.name, url: platform.url }
-        : { name: "", url: "" }
+        : { name: "", url: "" },
     );
   }, [open, reset, platform]);
 
@@ -61,7 +60,9 @@ export function PlatformDialog({ platform, trigger }: IPlatformDialogProps) {
       ? updatePlatformMutation
       : registerPlatformMutation;
     const payload = isEditing && platform ? { id: platform.id, ...data } : data;
-    mutation.mutate(payload as any, { onSuccess: () => setOpen(false) });
+    mutation.mutate(payload as UpdatePlatformPayload, {
+      onSuccess: () => setOpen(false),
+    });
   };
 
   return (
@@ -123,8 +124,8 @@ export function PlatformDialog({ platform, trigger }: IPlatformDialogProps) {
               {isLoading
                 ? "Salvando..."
                 : isEditing
-                ? "Salvar alterações"
-                : "Adicionar"}
+                  ? "Salvar alterações"
+                  : "Adicionar"}
             </Button>
           </DialogFooter>
         </Form>

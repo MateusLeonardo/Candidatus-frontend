@@ -19,9 +19,9 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState, type ReactNode } from "react";
 import { IState } from "../types/state";
-import { mutationRegisterState } from "../hooks/mutation-register-state";
-import { mutationUpdateState } from "../hooks/mutation-update-state";
+import { useMutationRegisterState } from "../hooks/use-mutation-register-state";
 import { FormField } from "@/components/shared/form-fields/form-field";
+import { useMutationUpdateState } from "../hooks/use-mutation-update-state";
 
 interface StateDialogProps {
   state?: IState;
@@ -34,8 +34,8 @@ const DEFAULT_VALUES: RegisterStateFormData = {
 };
 
 export function StateDialog({ state, trigger }: StateDialogProps) {
-  const registerStateMutation = mutationRegisterState();
-  const updateStateMutation = mutationUpdateState();
+  const registerStateMutation = useMutationRegisterState();
+  const updateStateMutation = useMutationUpdateState();
   const [open, setOpen] = useState(false);
   const isEditing = !!state;
 
@@ -119,8 +119,8 @@ export function StateDialog({ state, trigger }: StateDialogProps) {
               {isLoading
                 ? "Salvando..."
                 : isEditing
-                ? "Salvar alterações"
-                : "Adicionar"}
+                  ? "Salvar alterações"
+                  : "Adicionar"}
             </Button>
           </DialogFooter>
         </Form>

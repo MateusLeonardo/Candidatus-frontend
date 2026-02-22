@@ -1,11 +1,11 @@
-import { useToastError, useToastSuccess } from "@/hooks/use-toast";
 import api from "@/lib/api";
 import { IResponseError } from "@/features/auth/types/auth";
 import { IRequestRegisterCity } from "../types/city";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { showToastError, showToastSuccess } from "@/lib/utils/toast";
 
-export function mutationRegisterCity() {
+export function useMutationRegisterCity() {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -14,12 +14,11 @@ export function mutationRegisterCity() {
       return response.data;
     },
     onSuccess: () => {
-      useToastSuccess("Cidade registrada com sucesso!");
+      showToastSuccess("Cidade registrada com sucesso!");
       queryClient.invalidateQueries({ queryKey: ["cities"] });
     },
     onError: (error: AxiosError<IResponseError>) => {
-      useToastError(error);
+      showToastError(error);
     },
   });
 }
-

@@ -2,10 +2,10 @@
 import { PlatformDialog } from "@/features/platform/components/platform-dialog";
 import { PlatformTable } from "@/features/platform/components/platform-table";
 import { TableSkeleton } from "@/components/shared/table-skeleton";
-import { getAllPlatforms } from "@/features/platform/hooks/get-all-platforms";
+import { useGetAllPlatforms } from "@/features/platform/hooks/use-get-all-platforms";
 
 export default function PlataformasPage() {
-  const { data, isLoading } = getAllPlatforms();
+  const { data, isLoading } = useGetAllPlatforms();
 
   if (isLoading) return <TableSkeleton />;
   return (

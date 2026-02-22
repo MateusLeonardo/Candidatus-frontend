@@ -11,14 +11,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { CityDialog } from "./city-dialog";
-import { mutationDeleteCity } from "../hooks/mutation-delete-city";
+import { useMutationDeleteCity } from "../hooks/use-mutation-delete-city";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 
 interface CityTableProps {
   cities: ICity[];
 }
 export function CityTable({ cities }: CityTableProps) {
-  const deleteCityMutation = mutationDeleteCity();
+  const deleteCityMutation = useMutationDeleteCity();
   return (
     <Table>
       <TableHeader className="bg-accent">

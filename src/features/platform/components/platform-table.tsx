@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { IPlatform } from "../types/platform";
-import { mutationDeletePlatform } from "../hooks/mutation-delete-platform";
+import { useMutationDeletePlatform } from "../hooks/use-mutation-delete-platform";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { PlatformDialog } from "./platform-dialog";
 
@@ -17,7 +17,7 @@ interface PlatformTableProps {
   platforms: IPlatform[];
 }
 export function PlatformTable({ platforms }: PlatformTableProps) {
-  const deletePlatformMutation = mutationDeletePlatform();
+  const deletePlatformMutation = useMutationDeletePlatform();
 
   return (
     <Table>
