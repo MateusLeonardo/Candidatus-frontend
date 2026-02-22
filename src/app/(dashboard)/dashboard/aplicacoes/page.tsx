@@ -2,10 +2,10 @@
 import { ApplicationDialog } from "@/features/application/components/application-dialog";
 import { ApplicationTable } from "@/features/application/components/application-table";
 import { TableSkeleton } from "@/components/shared/table-skeleton";
-import { getAllApplications } from "@/features/application/hooks/get-all-applications";
+import { useGetAllApplications } from "@/features/application/hooks/use-get-all-applications";
 
 export default function AplicacoesPage() {
-  const { data, isLoading } = getAllApplications();
+  const { data, isLoading } = useGetAllApplications();
 
   if (isLoading) return <TableSkeleton />;
   return (

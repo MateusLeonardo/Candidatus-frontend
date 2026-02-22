@@ -1,23 +1,19 @@
-import { useToastError, useToastSuccess } from "@/hooks/use-toast";
 import api from "@/lib/api";
-import { IRequestUpdateApplication } from "../types/application";
 import { IResponseError } from "@/features/auth/types/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { showToastError, showToastSuccess } from "@/lib/utils/toast";
 
-export function mutationUpdateApplication() {
+export function useMutationDeleteApplication() {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: ({ id, ...data }: IRequestUpdateApplication) =>
-      api.put(`/application/${id}`, data),
+    mutationFn: (id: number) => api.delete(`/application/${id}`),
     onSuccess: () => {
-      useToastSuccess("Aplicação atualizada com sucesso!");
+      showToastSuccess("Aplicação removida com sucesso!");
       queryClient.invalidateQueries({ queryKey: ["applications"] });
     },
     onError: (error: AxiosError<IResponseError>) => {
-      useToastError(error);
+      showToastError(error);
     },
   });
 }
-

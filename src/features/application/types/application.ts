@@ -1,6 +1,7 @@
 import { ApplicationStatus } from "@/enums/application-status";
 import { WorkMode } from "@/enums/work-mode";
 import { ICompany } from "@/features/company/types/company";
+import { RegisterApplicationFormData } from "@/lib/validations/application";
 
 export interface IApplication {
   id: number;
@@ -20,18 +21,7 @@ export interface IApplication {
 export interface IResponseAllApplications {
   applications: IApplication[];
 }
-export interface IRequestRegisterApplication {
-  title: string;
-  description: string;
-  salary: number;
-  workMode: WorkMode;
-  url: string;
-  applicationDate: Date;
-  status: ApplicationStatus;
-  platformId: number;
-  companyId: number;
-}
 
-export interface IRequestUpdateApplication extends IRequestRegisterApplication {
+export interface UpdateApplicationPayload extends RegisterApplicationFormData {
   id: number;
 }

@@ -14,7 +14,7 @@ import {
 import { Form } from "@/components/ui/form";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { IApplication } from "../types/application";
+import { IApplication, UpdateApplicationPayload } from "../types/application";
 import {
   RegisterApplicationFormData,
   registerApplicationSchema,
@@ -24,10 +24,10 @@ import {
   ApplicationStatus,
   ApplicationStatusLabel,
 } from "@/enums/application-status";
-import { mutationRegisterApplication } from "../hooks/mutation-register-application";
-import { mutationUpdateApplication } from "../hooks/mutation-update-application";
-import { getAllPlatforms } from "@/features/platform/hooks/get-all-platforms";
-import { getAllCompanies } from "@/features/company/hooks/get-all-companies";
+import { useMutationRegisterApplication } from "../hooks/use-mutation-register-application";
+import { useMutationUpdateApplication } from "../hooks/use-mutation-update-application";
+import { useGetAllPlatforms } from "@/features/platform/hooks/use-get-all-platforms";
+import { useGetAllCompanies } from "@/features/company/hooks/use-get-all-companies";
 import { FormField } from "@/components/shared/form-fields/form-field";
 import { FormTextareaField } from "@/components/shared/form-fields/form-textarea-field";
 import { FormCurrencyField } from "@/components/shared/form-fields/form-currency-field";
@@ -45,10 +45,10 @@ export function ApplicationDialog({
   trigger,
 }: IApplicationDialogProps) {
   const [open, setOpen] = useState(false);
-  const registerApplicationMutation = mutationRegisterApplication();
-  const updateApplicationMutation = mutationUpdateApplication();
-  const platforms = getAllPlatforms();
-  const companies = getAllCompanies();
+  const registerApplicationMutation = useMutationRegisterApplication();
+  const updateApplicationMutation = useMutationUpdateApplication();
+  const platforms = useGetAllPlatforms();
+  const companies = useGetAllCompanies();
   const isEditing = !!application;
   const isLoading =
     registerApplicationMutation.isPending ||
@@ -108,7 +108,9 @@ export function ApplicationDialog({
       : registerApplicationMutation;
     const payload =
       isEditing && application ? { id: application.id, ...data } : data;
-    mutation.mutate(payload as any, { onSuccess: () => setOpen(false) });
+    mutation.mutate(payload as UpdateApplicationPayload, {
+      onSuccess: () => setOpen(false),
+    });
   };
 
   // Preparar opções para os selects

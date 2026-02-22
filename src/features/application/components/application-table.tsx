@@ -1,8 +1,5 @@
 "use client";
-import {
-  ApplicationStatus,
-  ApplicationStatusLabel,
-} from "@/enums/application-status";
+import { ApplicationStatusLabel } from "@/enums/application-status";
 import {
   TableBody,
   TableCell,
@@ -17,13 +14,13 @@ import { ApplicationDialog } from "./application-dialog";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
-import { mutationDeleteApplication } from "../hooks/mutation-delete-application";
+import { useMutationDeleteApplication } from "../hooks/use-mutation-delete-application";
 
 interface ApplicationTableProps {
   applications: IApplication[];
 }
 export function ApplicationTable({ applications }: ApplicationTableProps) {
-  const deleteMutation = mutationDeleteApplication();
+  const deleteMutation = useMutationDeleteApplication();
   return (
     <Table>
       <TableHeader className="bg-accent">
@@ -75,4 +72,3 @@ export function ApplicationTable({ applications }: ApplicationTableProps) {
     </Table>
   );
 }
-
